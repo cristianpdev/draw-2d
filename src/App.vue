@@ -11,7 +11,6 @@ import DataSelect from './components/DataSelect.vue';
   <div class="grid grid-cols-2 ">
     <main class="md:container md:mx-auto px-4 py-8">
       <Select />
-      <Inputs />
       <DataSelect  />
       <div id="buttons">
         <div class="flex justify-start">

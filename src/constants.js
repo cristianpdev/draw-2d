@@ -29,22 +29,3 @@ export const inputs = {
     },
   ]
 }
-
-export const dataselect = {
-  "data": [
-    {
-      name: 'Teste',
-      isPolygn: true,
-      type: 'Polilinha',
-      x: 0,
-      y: 0
-    },
-    {
-      name: 'Teste2',
-      isPolygn: false,
-      type: 'Polilinha',
-      x: 1,
-      y: 1
-    }
-  ]
-}
