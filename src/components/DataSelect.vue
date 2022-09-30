@@ -1,19 +1,32 @@
 <template>
-  <label for="countries_multiple" class="bg-white text-sm font-medium text-gray-900 dark:text-gray-400">Select an
-    option</label>
-  <select multiple id="countries_multiple"
-    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    <option class="bg-white" selected>Choose countries</option>
-    <option class="bg-white" value="US">United States</option>
-    <option class="bg-white" value="FR">France</option>
-    <option class="bg-white" value="DE">Germany</option>
-    <option class="bg-white" value="CA">Canada</option>
-  </select>
+  <div class="grid grid-cols-3 gap-2" v-for="item in dataselect.data" :key="item.name">
+    <div class="text-white w-full md:w-1/3 px-1 mb-3 md:mb-0 col-span-3">
+      Nome: {{item.name}} - (x: {{item.x}} - y: {{item.y}})
+    </div>
+    <div class="grid grid-cols-2 inline">
+      <button type="button"
+        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        Salvar
+      </button>
+      <button type="button"
+        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+        Excluir
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
+import { dataselect } from '../constants';
+
 export default {
-name: 'DataSelect'
+  name: 'DataSelect',
+  data() {
+    return {
+      dataselect
+    }
+  },
+  mounted() { }
 }
 </script>
 

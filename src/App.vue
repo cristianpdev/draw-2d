@@ -9,10 +9,10 @@ import DataSelect from './components/DataSelect.vue';
 
 <template>
   <div class="grid grid-cols-2 ">
-    <main>
+    <main class="md:container md:mx-auto px-4 py-8">
       <Select />
       <Inputs />
-      <DataSelect />
+      <DataSelect  />
       <div id="buttons">
         <div class="flex justify-start">
           <NavControl />
@@ -22,20 +22,13 @@ import DataSelect from './components/DataSelect.vue';
         </div>
       </div>
     </main>
-    <aside>
+    <aside class="md:mx-auto py-8">
       <Viewport />
     </aside>
   </div>
 </template>
 
 <style >
-main {
-  margin: auto;
-  padding-top: 20px;
-}
-aside {
-  margin: auto;
-}
 #buttons {
   padding-top: 20px;
 }

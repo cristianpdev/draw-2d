@@ -40,9 +40,9 @@ export default {
     this.vueCanvas = ctx; 
     this.vueCanvas.moveTo(0, 0);
 
-    this.drawLine(100, 50);
-    this.drawPolyline(100,10)
-    this.drawPoint(30,90);
+    this.drawLine(150, 50);
+    this.drawPolyline(10,90)
+    this.drawPoint(50,90);
     },
 }
 </script>
