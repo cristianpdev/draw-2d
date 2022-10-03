@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4 border-solid border-2 border-sky-500 rounded px-2 py-2 bg-white">
     <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0" v-for="item in inputs.data">
+      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0" v-for="(item, index) in inputs.data" :key="index">
         <label class="block uppercase tracking-wide text-black text-xs font-bold mb-2" :for="item.inputId">
           {{item.labelText}}
         </label>
@@ -22,7 +22,7 @@ import { inputs } from '../constants';
 
 export default {
   name: 'Inputs',
-  props: ['labelText', 'inputId'],
+  props: ['labelText', 'inputId',],
   data() {
     return {
       inputs
