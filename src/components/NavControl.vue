@@ -18,11 +18,8 @@
 </template>
 
 <script>
-import Inputs from './Inputs.vue';
-
 export default {
   name: "NavControl",
-  components: { Inputs }
 }
 </script>
 

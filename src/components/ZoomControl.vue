@@ -11,11 +11,9 @@
 </template>
 
 <script>
-import Inputs from './Inputs.vue';
 
 export default {
   name: "ZoomControl",
-  components: { Inputs }
 }
 </script>
 

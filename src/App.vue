@@ -2,7 +2,6 @@
 import Viewport from './components/Viewport.vue';
 import ZoomControl from './components/ZoomControl.vue';
 import NavControl from './components/NavControl.vue';
-import Inputs from './components/Inputs.vue';
 import Select from './components/Select.vue';
 import DataSelect from './components/DataSelect.vue';
 </script>
