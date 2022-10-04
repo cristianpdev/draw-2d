@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import emiter from '../main';
+
 export default {
   name: 'Viewport',
   data() {
@@ -24,26 +26,35 @@ export default {
       this.vueCanvas.stroke();
     },
     drawPolyline(x, y) {
-    this.vueCanvas.beginPath();
-    this.vueCanvas.moveTo(10, 100);
-    this.vueCanvas.lineTo(100,100);
-    this.vueCanvas.lineTo(100,130);
-    this.vueCanvas.lineTo(10,130);
-    // Retângulo
-    // this.vueCanvas.closePath();
-    this.vueCanvas.stroke();
+      this.vueCanvas.beginPath();
+      this.vueCanvas.moveTo(10, 100);
+      this.vueCanvas.lineTo(100, 100);
+      this.vueCanvas.lineTo(100, 130);
+      this.vueCanvas.lineTo(10, 130);
+      // Retângulo
+      // this.vueCanvas.closePath();
+      this.vueCanvas.stroke();
     }
   },
   mounted() {
     var c = document.getElementById("viewport");
     var ctx = c.getContext("2d");
-    this.vueCanvas = ctx; 
+    this.vueCanvas = ctx;
     this.vueCanvas.moveTo(0, 0);
+    emiter.on('draw', value => {
+      if (value.type === 'ponto') {
+        this.drawPoint(value.x, value.y);
+      }
+      else if (value.type === 'linha') {
+        this.drawLine(value.x, value.y);
+      }
+      else if (value.type === 'polilinha') {
+        this.drawPolyline(value.x, value.y)
+      }
+    });
 
-    this.drawLine(150, 50);
-    this.drawPolyline(10,90)
-    this.drawPoint(50,90);
-    },
+
+  },
 }
 </script>
 
