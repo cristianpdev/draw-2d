@@ -31,8 +31,15 @@ export default {
       this.vueCanvas.lineTo(100, 100);
       this.vueCanvas.lineTo(100, 130);
       this.vueCanvas.lineTo(10, 130);
-      // Retângulo
-      // this.vueCanvas.closePath();
+      this.vueCanvas.stroke();
+    },
+    drawPolygn(x, y) {
+      this.vueCanvas.beginPath();
+      this.vueCanvas.moveTo(10, 100);
+      this.vueCanvas.lineTo(100, 100);
+      this.vueCanvas.lineTo(100, 130);
+      this.vueCanvas.lineTo(10, 130);
+      this.vueCanvas.closePath();
       this.vueCanvas.stroke();
     }
   },
@@ -49,7 +56,8 @@ export default {
         this.drawLine(value.x, value.y);
       }
       else if (value.type === 'polilinha') {
-        this.drawPolyline(value.x, value.y)
+        if (value.isPolygn) this.drawPolygn(value.x, value.y);
+        else this.drawPolyline(value.x, value.y);
       }
     });
 

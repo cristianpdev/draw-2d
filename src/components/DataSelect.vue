@@ -18,6 +18,11 @@
   </div>
   <div v-if="this.isEditable">
     <div class="mb-4 border-solid border-2 border-sky-500 rounded px-2 py-2 bg-white">
+      <div class="flex items-center mb-4" v-if="dataselect.data[position].type === `polilinha`">
+        <input id="polygn" type="checkbox" v-model="checked"
+          class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="polygn-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Polígono</label>
+      </div>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0" v-for="(item, index) in inputs.data" :key="index">
           <label class="block uppercase tracking-wide text-black text-xs font-bold mb-2" :for="item.inputId">
@@ -52,6 +57,7 @@ export default {
       isEditable: false,
       position: null,
       inputs,
+      checked: false,
     };
   },
   methods: {
@@ -69,8 +75,8 @@ export default {
     saveCoordinates() {
       this.dataselect.data[this.position].x = document.getElementById('X').value;
       this.dataselect.data[this.position].y = document.getElementById('Y').value;
+      this.dataselect.data[this.position].isPolygn = this.checked;
       emiter.emit('draw', this.dataselect.data[this.position]);
-      
       const editButton = document.getElementById(`edit${this.position}`);
       editButton.remove();
 
@@ -79,7 +85,7 @@ export default {
   },
   mounted() {
     emiter.on("add-object", value => {
-      this.dataselect.data.push({ name: value[1], type: value[0], x: 0, y: 0, position: this.dataselect.data.length });
+      this.dataselect.data.push({ name: value[1], type: value[0], isPolygn: this.checked, x: 0, y: 0, position: this.dataselect.data.length });
     });
   },
 }
