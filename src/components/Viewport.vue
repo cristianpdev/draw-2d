@@ -41,14 +41,8 @@ export default {
       this.vueCanvas.lineTo(10, 130);
       this.vueCanvas.closePath();
       this.vueCanvas.stroke();
-    }
-  },
-  mounted() {
-    var c = document.getElementById("viewport");
-    var ctx = c.getContext("2d");
-    this.vueCanvas = ctx;
-    this.vueCanvas.moveTo(0, 0);
-    emiter.on('draw', value => {
+    },
+    draw(value) {
       if (value.type === 'ponto') {
         this.drawPoint(value.x, value.y);
       }
@@ -58,6 +52,22 @@ export default {
       else if (value.type === 'polilinha') {
         if (value.isPolygn) this.drawPolygn(value.x, value.y);
         else this.drawPolyline(value.x, value.y);
+      }
+    }
+  },
+  mounted() {
+    var c = document.getElementById("viewport");
+    var ctx = c.getContext("2d");
+    this.vueCanvas = ctx;
+    this.vueCanvas.moveTo(0, 0);
+    emiter.on('draw', value => {
+      this.draw(value);
+    });
+
+    emiter.on('clear-canvas', value => {
+      this.vueCanvas.clearRect(0, 0, 600, 400);
+      for (let i = 0; i < value.length; i++) {
+        this.draw(value[i]);
       }
     });
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-2" v-for="(item, index) in dataselect.data" :key="index" :id="`id${item.position}`">
+  <div class="grid grid-cols-3 gap-2" v-for="(item, index) in dataselect.data" :key="index" :id="`id-${index}`">
     <div class="text-white w-full md:w-1/3 px-1 mb-3 md:mb-0 col-span-3">
       <b>{{item.type.toUpperCase()}}:</b>
       <br>Nome: {{item.name}} - (x: {{item.x}} - y: {{item.y}})
@@ -68,9 +68,10 @@ export default {
       }
     },
     deleteValue(index) {
-      const element = document.getElementById(`id${index}`);
+      const element = document.getElementById(`id-${index}`);
       element.remove();
       this.dataselect.data.splice(index, 1);
+      emiter.emit('clear-canvas', this.dataselect.data);
     },
     saveCoordinates() {
       this.dataselect.data[this.position].x = document.getElementById('X').value;
