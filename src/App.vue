@@ -10,18 +10,14 @@ import DataSelect from './components/DataSelect.vue';
   <div class="grid grid-cols-2 ">
     <main class="md:container md:mx-auto px-4 py-8">
       <Select />
-      <DataSelect  />
-      <div id="buttons">
-        <div class="flex justify-start">
-          <NavControl />
-        </div>
-        <div class="flex justify-start">
-          <ZoomControl />
-        </div>
-      </div>
+      <DataSelect />
     </main>
-    <aside class="md:mx-auto py-8">
+    <aside class="grid grid-cols-1 md:mx-auto py-8">
       <Viewport />
+      <div id="buttons">
+        <NavControl />
+        <ZoomControl />
+      </div>
     </aside>
   </div>
 </template>
@@ -29,6 +25,7 @@ import DataSelect from './components/DataSelect.vue';
 <style >
 #buttons {
   padding-top: 20px;
+  margin: auto;
 }
 </style>
 

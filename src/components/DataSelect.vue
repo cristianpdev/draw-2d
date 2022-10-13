@@ -1,17 +1,16 @@
 <template>
-  <div class="grid grid-cols-3 gap-2" v-for="(item, index) in dataselect.data" :key="index" :id="`id-${index}`">
-    <div class="text-white w-full md:w-1/3 px-1 mb-3 md:mb-0 col-span-3">
-      <b>{{item.type.toUpperCase()}}:</b>
-      <br>Nome: {{item.name}} - (x: {{item.x}} - y: {{item.y}})
+  <div class="flex flex-auto -mx-3 mb-2 border-solid border-2 border-sky-500 rounded px-2 py-2 bg-white" v-for="(item, index) in dataselect.data" :key="index" :id="`id-${index}`">
+    <div class="flex w-full justify-center items-center">
+      <b>{{item.type.toUpperCase()}}:</b> - Nome: {{item.name}} - (x: {{item.x}} - y: {{item.y}})
     </div>
-    <input id="position" type="hidden" :value="index">
-    <div class="grid grid-cols-2 inline">
+
+    <div class="flex flex-row w-full justify-center m-auto">
       <button type="button" @click="updateValue(item.position)" :id="`edit${item.position}`"
-        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        class="flex justify-center items-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
         Editar
       </button>
       <button type="button" @click="deleteValue(index)"
-        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+        class=" flex justify-center items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
         Excluir
       </button>
     </div>
