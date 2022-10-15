@@ -25,33 +25,26 @@ export default {
 
       this.vueCanvas.stroke();
     },
-    drawPolyline(x, y) {
+    drawPolyline(value) {
       this.vueCanvas.beginPath();
-      this.vueCanvas.moveTo(10, 100);
-      this.vueCanvas.lineTo(100, 100);
-      this.vueCanvas.lineTo(100, 130);
-      this.vueCanvas.lineTo(10, 130);
-      this.vueCanvas.stroke();
-    },
-    drawPolygn(x, y) {
-      this.vueCanvas.beginPath();
-      this.vueCanvas.moveTo(10, 100);
-      this.vueCanvas.lineTo(100, 100);
-      this.vueCanvas.lineTo(100, 130);
-      this.vueCanvas.lineTo(10, 130);
-      this.vueCanvas.closePath();
+      this.vueCanvas.moveTo(0, 0);
+      for (let i = 1; i <= value.numberOfLines; i++) {
+        this.vueCanvas.lineTo(value[`x${i}`], value[`x${i}`]);
+      }
+      if (value.isPolygn) {
+        this.vueCanvas.closePath();
+      }
       this.vueCanvas.stroke();
     },
     draw(value) {
       if (value.type === 'ponto') {
-        this.drawPoint(value.x, value.y);
+        this.drawPoint(value[`x1`], value[`y1`]);
       }
       else if (value.type === 'linha') {
-        this.drawLine(value.x, value.y);
+        this.drawLine(value[`x1`], value[`x1`]);
       }
       else if (value.type === 'polilinha') {
-        if (value.isPolygn) this.drawPolygn(value.x, value.y);
-        else this.drawPolyline(value.x, value.y);
+        this.drawPolyline(value);
       }
     }
   },

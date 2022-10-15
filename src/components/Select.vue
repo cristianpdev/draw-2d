@@ -72,6 +72,7 @@ export default {
         emiter.emit('add-object', [this.selected, this.$refs.nameInput.value, this.checked, this.numberOfLines]);
         this.$refs.nameInput.value = '';
         this.selected = '';
+        this.numberOfLines = 1;
       } else {
         Swal.fire({
           title: 'Campos obrigatórios!',

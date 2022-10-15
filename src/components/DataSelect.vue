@@ -1,10 +1,11 @@
 <template>
   <div class="grid grid-cols-1" v-if="dataselect.data.length > 0">
+    <h2 class="text-white font-mono font-bold">Lista de objetos</h2>
     <ul>
-      <li  v-for="(item, index) in this.dataselect.data" :key="index" :id="`id-${index}`">
+      <li v-for="(item, index) in this.dataselect.data" :key="index" :id="`id-${index}`">
         <div class="flex flex-auto -mx-3 mb-2 border-solid border-2 border-sky-500 rounded px-2 py-2 bg-white">
           <div class="flex w-full justify-center items-center">
-            <b>{{item.type.toUpperCase()}}:</b> - Nome: {{item.name}} - (x: {{item.x}} - y: {{item.y}})
+            <b>{{item.type.toUpperCase()}}:</b> - Nome: {{item.name}} - <div v-if="dataselect.data[position]" ><p v-for="n in dataselect.data[position].numberOfLines" :key="n">({{`x${n}`}}: {{item[`x${n}`]}} - {{`y${n}`}}: {{item[`y${n}`]}})</p></div>
           </div>
 
           <div class="flex flex-row w-full justify-center m-auto">
@@ -23,14 +24,14 @@
   </div>
   <div v-if="this.isEditable">
     <div class="mb-4 border-solid border-2 border-sky-500 rounded px-2 py-2 bg-white">
-      <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="flex flex-wrap -mx-3 mb-6" v-for="n in dataselect.data[position].numberOfLines" :key="n">
         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0" v-for="(item, index) in inputs.data" :key="index">
-          <label class="block uppercase tracking-wide text-black text-xs font-bold mb-2" :for="item.inputId">
+          <label class="block uppercase tracking-wide text-black text-xs font-bold mb-2" :for="`${item.inputId}-${n}`">
             {{item.labelText}}
           </label>
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            :id="`${item.inputId}`" type="number" :value="item.value">
+            :id="`${item.inputId}-${n}`" type="number" :value="item.value">
         </div>
       </div>
       <div class="w-full md:w-1/3">
@@ -58,7 +59,6 @@ export default {
       position: null,
       inputs,
       checked: false,
-      numberOfLines: 1
     };
   },
   methods: {
@@ -76,19 +76,19 @@ export default {
       emiter.emit('clear-canvas', this.dataselect.data);
     },
     saveCoordinates() {
-      this.dataselect.data[this.position].x = document.getElementById('X').value;
-      this.dataselect.data[this.position].y = document.getElementById('Y').value;
-      console.log(this.dataselect.data);
+      for (let i = 1; i <= this.dataselect.data[this.position].numberOfLines; i++) {
+        this.dataselect.data[this.position][`x${i}`] = document.getElementById(`X-${i}`).value;
+        this.dataselect.data[this.position][`y${i}`] = document.getElementById(`Y-${i}`).value;
+      }
       emiter.emit('draw', this.dataselect.data[this.position]);
       const editButton = document.getElementById(`edit${this.position}`);
       editButton.remove();
-
       this.isEditable = false;
     },
   },
   mounted() {
     emiter.on("add-object", value => {
-      this.dataselect.data.push({ name: value[1], type: value[0], isPolygn: value[2], numberOfLines: value[3], x: 0, y: 0, position: this.dataselect.data.length });
+      this.dataselect.data.push({ name: value[1], type: value[0], isPolygn: value[2], numberOfLines: value[3], position: this.dataselect.data.length });
     });
   },
 }
