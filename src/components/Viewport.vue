@@ -27,9 +27,9 @@ export default {
     },
     drawPolyline(value) {
       this.vueCanvas.beginPath();
-      this.vueCanvas.moveTo(0, 0);
       for (let i = 1; i <= value.numberOfLines; i++) {
-        this.vueCanvas.lineTo(value[`x${i}`], value[`x${i}`]);
+        if (i === 1) this.vueCanvas.moveTo(value[`x${i}`], value[`y${i}`]);
+        else this.vueCanvas.lineTo(value[`x${i}`], value[`y${i}`]);
       }
       if (value.isPolygn) {
         this.vueCanvas.closePath();

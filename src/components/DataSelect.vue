@@ -59,6 +59,7 @@ export default {
       position: null,
       inputs,
       checked: false,
+      numberOfLines: [],
     };
   },
   methods: {
@@ -89,6 +90,7 @@ export default {
   mounted() {
     emiter.on("add-object", value => {
       this.dataselect.data.push({ name: value[1], type: value[0], isPolygn: value[2], numberOfLines: value[3], position: this.dataselect.data.length });
+      this.numberOfLines.push({numberOfLines: value[3]})
     });
   },
 }
